@@ -1,4 +1,6 @@
 ﻿using Frame.Domain.Interfaces;
+using Frame.Models;
+using Frame.Util.Excecoes;
 using FrameRepository;
 using FrameRepository.Interfaces;
 using System;
@@ -16,14 +18,26 @@ namespace Frame.Domain
             _usuarioRepository = usuarioRepository;
         }
 
-        public void CriarUsuario(string nome, string senha)
+        public Usuario CriarUsuario(string nome, string senha)
         {
-            _usuarioRepository.CriarUsuario(nome, senha);
+            var usuarioComMesmoNome = _usuarioRepository.ObterUsuarioPorNome(nome);
+
+            if (usuarioComMesmoNome != null)
+            {
+                throw new ErroCriarUsuarioComMesmoNomeException();
+            }
+
+            return _usuarioRepository.CriarUsuario(nome, senha);
         }
 
-        public void ExcluirUsuario(int id)
+        public Usuario ObterUsuarioValido(string nome, string senha)
         {
-            _usuarioRepository.ExcluirUsuario(id);
+            var usuario = _usuarioRepository.ObterUsuarioPorNomeESenha(nome, senha);
+
+            if (usuario == null)
+                throw new UsuarioOuSenhaInvalidosException();
+
+            return usuario;
         }
     }
 }

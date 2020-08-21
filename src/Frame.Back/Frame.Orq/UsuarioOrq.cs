@@ -1,5 +1,7 @@
 ﻿using Frame.Domain;
 using Frame.Domain.Interfaces;
+using Frame.Models;
+using Frame.Models.Front;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,20 +11,31 @@ namespace Frame.Orq
     public class UsuarioOrq : IUsuarioOrq
     {
         private readonly IUsuarioDomain _usuarioDomain;
+        private readonly IJwtDomain _jwtDomain;
 
-        public UsuarioOrq(IUsuarioDomain usuarioDomain)
+        public UsuarioOrq(IUsuarioDomain usuarioDomain, IJwtDomain jwtDomain)
         {
             _usuarioDomain = usuarioDomain;
+            _jwtDomain = jwtDomain;
         }
 
-        public void CriarUsuario(string nome, string senha)
+        public RetornoAutenticacao AutenticarUsuario(string nome, string senha)
         {
-            _usuarioDomain.CriarUsuario(nome, senha);
+            return GerarRetorno(_usuarioDomain.ObterUsuarioValido(nome, senha));
         }
 
-        public void ExcluirUsuario(int id)
+        public RetornoAutenticacao CriarUsuario(string nome, string senha)
+        {            
+            return GerarRetorno(_usuarioDomain.CriarUsuario(nome, senha));
+        }        
+
+        private RetornoAutenticacao GerarRetorno(Usuario usuario)
         {
-            throw new NotImplementedException();
+            return new RetornoAutenticacao()
+            {
+                Usuario = usuario,
+                Token = _jwtDomain.GerarToken(usuario)
+            };
         }
     }
 }

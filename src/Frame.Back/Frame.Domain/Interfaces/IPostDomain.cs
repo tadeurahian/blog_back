@@ -6,5 +6,6 @@ namespace Frame.Domain.Interfaces
 {
     public interface IPostDomain
     {
+        int CriarPost(string titulo, string idUsuario);
     }
 }

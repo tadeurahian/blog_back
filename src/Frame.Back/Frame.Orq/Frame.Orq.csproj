@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Frame.Domain\Frame.Domain.csproj" />
+    <ProjectReference Include="..\Frame.Models\Frame.Models.csproj" />
   </ItemGroup>
 
 </Project>
