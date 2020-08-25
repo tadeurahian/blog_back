@@ -11,7 +11,13 @@ namespace Frame.Models
         public string Titulo { get; set; }
         public bool Ativo { get; set; }
         public TipoPost Tipo { get; set; }
+        public int IdUsuarioCriador { get; set; }
 
-        public Usuario UsuarioCriador { get; set; }
+        public Usuario Usuario { get; set; }
+
+        public Texto Conteudo { get; set; }
+        public Texto Link { get; set; }
+        public List<Imagem> Imagens { get; set; }
+
     }
 }

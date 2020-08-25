@@ -23,8 +23,8 @@ namespace Frame.Host.Controllers
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = "Bearer")]
-        public IActionResult CriarPost([FromBody]RequisicaoCriarPost requisicao)
-        {          
+        public IActionResult CriarPost([FromBody] RequisicaoCriarPost requisicao)
+        {
             try
             {
                 _postOrq.CriarPost(requisicao.Imagens, requisicao.Texto, requisicao.Titulo, requisicao.Link, User.FindFirst(ClaimTypes.PrimarySid).Value);
@@ -33,6 +33,25 @@ namespace Frame.Host.Controllers
                 {
                     Sucesso = true,
                     Mensagem = "Post criado com sucesso!"
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        //[Authorize(AuthenticationSchemes = "Bearer")]
+        public IActionResult ObterPosts()
+        {
+            try
+            {
+
+                return Ok(new RetornoPadrao<List<PostFront>>()
+                {
+                    Sucesso = true,                    
+                    Resultado = _postOrq.ObterPosts()
                 });
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using Frame.Domain.Interfaces;
+using Frame.Models;
 using FrameRepository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,11 @@ namespace Frame.Domain
             var uriImagem = _blobRepository.Adicionar(imagem, mime, titulo);
 
             _imagemRepository.CriarImagem(uriImagem, titulo, idPost);
+        }
+
+        public List<Imagem> ObterImagensPorPost(int idPost)
+        {
+            return _imagemRepository.ObterImagensPorPost(idPost);
         }
     }
 }

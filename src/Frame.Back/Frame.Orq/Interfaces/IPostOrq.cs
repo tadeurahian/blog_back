@@ -8,5 +8,6 @@ namespace Frame.Orq.Interfaces
     public interface IPostOrq
     {
         void CriarPost(List<RequisicaoImagem> imagens, string texto, string titulo, string link, string idUsuario);
+        List<PostFront> ObterPosts();
     }
 }

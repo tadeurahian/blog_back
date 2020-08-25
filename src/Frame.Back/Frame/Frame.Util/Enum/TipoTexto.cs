@@ -6,7 +6,7 @@ namespace Frame.Util.Enum
 {
     public enum TipoTexto
     {
-        Texto,
+        Conteudo,
         Link
     }
 }

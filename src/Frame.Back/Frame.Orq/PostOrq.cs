@@ -1,8 +1,10 @@
 ﻿using Frame.Domain.Interfaces;
+using Frame.Models;
 using Frame.Models.Front;
 using Frame.Orq.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Frame.Orq
@@ -38,6 +40,32 @@ namespace Frame.Orq
             {
                 imagens.ForEach(imagem => _imagemDomain.CriarImagem(imagem.Imagem, imagem.Mime, imagem.Titulo, idPost));
             }
+        }
+
+        public List<PostFront> ObterPosts()
+        {
+            var posts = _postDomain.ObterTodosOsPosts();
+
+            ObterRelacionamentos(posts);
+
+            return posts.Select(post => new PostFront()
+            {
+                Titulo = post.Titulo,
+                IdCriador = post.Usuario.Id,
+                Conteudo = post.Conteudo.Conteudo,
+                Link = post.Link.Conteudo,
+                Imagens = post.Imagens.Select(imagem => imagem.LinkBlob).ToList()
+            }).ToList();
+        }
+
+        private void ObterRelacionamentos(List<Post> posts)
+        {
+            posts.ForEach(post =>
+            {
+                post.Conteudo = _textoDomain.ObterConteudoPorPost(post.Id);
+                post.Link = _textoDomain.ObterLinkPorPost(post.Id);
+                post.Imagens = _imagemDomain.ObterImagensPorPost(post.Id);
+            });
         }
     }
 }

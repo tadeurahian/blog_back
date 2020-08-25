@@ -1,8 +1,10 @@
 ﻿using Frame.Domain.Interfaces;
+using Frame.Models;
 using Frame.Util.Enum;
 using FrameRepository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Frame.Domain
@@ -18,7 +20,7 @@ namespace Frame.Domain
 
         public void CriarConteudo(string conteudo, int idPost)
         {
-            CriarTexto(conteudo, TipoTexto.Texto, idPost);
+            CriarTexto(conteudo, TipoTexto.Conteudo, idPost);
         }
 
         public void CriarLink(string link, int idPost)
@@ -26,9 +28,24 @@ namespace Frame.Domain
             CriarTexto(link, TipoTexto.Link, idPost);
         }
 
+        public Texto ObterConteudoPorPost(int idPost)
+        {
+            return ObterTexto(idPost, TipoTexto.Conteudo);
+        }
+
+        public Texto ObterLinkPorPost (int idPost)
+        {
+            return ObterTexto(idPost, TipoTexto.Link);
+        }
+
         private void CriarTexto(string conteudo, TipoTexto tipo, int idPost)
         {
             _textoRepository.CriarTexto(conteudo, tipo, idPost);
+        }
+
+        private Texto ObterTexto(int idPost, TipoTexto tipo)
+        {
+            return _textoRepository.ObterTextosPost(idPost)?.Where(texto => texto.Tipo == tipo).FirstOrDefault();
         }
     }
 }

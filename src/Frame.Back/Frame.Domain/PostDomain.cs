@@ -1,4 +1,5 @@
 ﻿using Frame.Domain.Interfaces;
+using Frame.Models;
 using FrameRepository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace Frame.Domain
         public int CriarPost(string titulo, string idUsuario)
         {
             return _postRepository.CriarPost(titulo, idUsuario);
+        }
+
+        public List<Post> ObterTodosOsPosts()
+        {
+            return _postRepository.ObterTodosOsPosts();
         }
     }
 }

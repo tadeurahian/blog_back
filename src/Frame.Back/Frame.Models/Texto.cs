@@ -10,8 +10,7 @@ namespace Frame.Models
         public int Id { get; set; }
         public TipoTexto Tipo { get; set; }
         public string Conteudo { get; set; }
-
-        public Post Post { get; set; }
+        public int IdPost { get; set; }
 
     }
 }
