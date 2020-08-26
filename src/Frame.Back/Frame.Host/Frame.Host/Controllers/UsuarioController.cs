@@ -38,6 +38,10 @@ namespace Frame.Host.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (CamposVaziosCriarUsuariosException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 throw ex;

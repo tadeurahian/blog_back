@@ -27,6 +27,11 @@ namespace Frame.Domain
                 throw new ErroCriarUsuarioComMesmoNomeException();
             }
 
+            if(String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(senha))
+            {
+                throw CamposVaziosCriarUsuariosException();
+            }
+
             return _usuarioRepository.CriarUsuario(nome, senha);
         }
 
