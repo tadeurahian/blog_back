@@ -42,12 +42,11 @@ namespace Frame.Host.Controllers
         }
 
         [HttpGet]
-        //[Authorize(AuthenticationSchemes = "Bearer")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult ObterPosts()
         {
             try
             {
-
                 return Ok(new RetornoPadrao<List<PostFront>>()
                 {
                     Sucesso = true,                    
