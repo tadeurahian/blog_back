@@ -25,6 +25,7 @@ namespace FrameRepository
                                                             u.Nome
                                                         FROM Post p
                                                         INNER JOIN Usuario AS u ON p.IdUsuarioCriador = u.Id
+                                                        ORDER BY p.Id DESC
                                                         ";
 
         public int CriarPost(string titulo, string idUsuarioCriador)
