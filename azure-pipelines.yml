@@ -14,7 +14,13 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.sln'
-    workingDirectory: '$(Build.BinariesDirectory)'
+    workingDirectory: - task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: '''$(Build.BinariesDirectory)'''
 
 - task: ArchiveFiles@2
   inputs:
