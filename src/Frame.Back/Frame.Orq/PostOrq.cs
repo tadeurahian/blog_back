@@ -49,9 +49,9 @@ namespace Frame.Orq
             {
                 Titulo = post.Titulo,
                 IdCriador = post.Usuario.Id,
-                Conteudo = post.Conteudo.Conteudo,
-                Link = post.Link.Conteudo,
-                Imagens = post.Imagens.Select(imagem => imagem.LinkBlob).ToList()
+                Conteudo = post.Conteudo?.Conteudo,
+                Link = post.Link?.Conteudo,
+                Imagens = post.Imagens?.Select(imagem => imagem.LinkBlob).ToList()
             }).ToList();
         }
 

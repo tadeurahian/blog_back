@@ -35,6 +35,11 @@ namespace Frame.Domain
             return _usuarioRepository.CriarUsuario(nome, senha);
         }
 
+        private Exception CamposVaziosCriarUsuariosException()
+        {
+            throw new NotImplementedException();
+        }
+
         public Usuario ObterUsuarioValido(string nome, string senha)
         {
             var usuario = _usuarioRepository.ObterUsuarioPorNomeESenha(nome, senha);
