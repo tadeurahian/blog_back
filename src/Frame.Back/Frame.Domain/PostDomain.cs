@@ -1,5 +1,6 @@
 ﻿using Frame.Domain.Interfaces;
 using Frame.Models;
+using Frame.Util.Excecoes;
 using FrameRepository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace Frame.Domain
 
         public int CriarPost(string titulo, string idUsuario)
         {
+            if(String.IsNullOrEmpty(titulo))
+            {
+                throw new ErroCriarPostSemTituloException();
+            }
+
             return _postRepository.CriarPost(titulo, idUsuario);
         }
 

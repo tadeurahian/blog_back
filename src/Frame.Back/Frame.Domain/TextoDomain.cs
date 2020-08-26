@@ -1,6 +1,7 @@
 ﻿using Frame.Domain.Interfaces;
 using Frame.Models;
 using Frame.Util.Enum;
+using Frame.Util.Excecoes;
 using FrameRepository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,14 @@ namespace Frame.Domain
 
         private void CriarTexto(string conteudo, TipoTexto tipo, int idPost)
         {
+            if(String.IsNullOrEmpty(conteudo))
+            {
+                if (tipo == TipoTexto.Conteudo)
+                    throw new ErroConteudoVazioException("O conteudo não pode estar vazio");
+
+                throw new ErroConteudoVazioException("O link não pode estar vazio");
+            }                
+
             _textoRepository.CriarTexto(conteudo, tipo, idPost);
         }
 

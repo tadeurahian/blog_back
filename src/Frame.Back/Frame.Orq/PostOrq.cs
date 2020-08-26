@@ -26,10 +26,7 @@ namespace Frame.Orq
         {
             var idPost = _postDomain.CriarPost(titulo, idUsuario);
 
-            if (!string.IsNullOrEmpty(texto))
-            {
-                _textoDomain.CriarConteudo(texto, idPost);
-            }
+            _textoDomain.CriarConteudo(texto, idPost);
 
             if (!string.IsNullOrEmpty(link))
             {
