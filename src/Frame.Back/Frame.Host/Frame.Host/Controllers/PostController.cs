@@ -1,6 +1,7 @@
 ﻿using Frame.Models;
 using Frame.Models.Front;
 using Frame.Orq.Interfaces;
+using Frame.Util.Excecoes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -35,6 +36,14 @@ namespace Frame.Host.Controllers
                     Mensagem = "Post criado com sucesso!"
                 });
             }
+            catch (ErroCriarPostSemTituloException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ErroConteudoVazioException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 throw ex;
@@ -49,7 +58,7 @@ namespace Frame.Host.Controllers
             {
                 return Ok(new RetornoPadrao<List<PostFront>>()
                 {
-                    Sucesso = true,                    
+                    Sucesso = true,
                     Resultado = _postOrq.ObterPosts()
                 });
             }
