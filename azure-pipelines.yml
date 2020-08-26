@@ -13,7 +13,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '**/Frame.Host.csproj'
+    projects: '**/*.sln'
 
 - task: ArchiveFiles@2
   inputs:
