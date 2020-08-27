@@ -9,5 +9,7 @@ namespace FrameRepository.Interfaces
     {
         int CriarPost(string titulo, string idUsuarioCriador);
         List<Post> ObterTodosOsPosts();
+        void ExcluirPost(int idPost);
+        Post ObterPost(int idPost);
     }
 }

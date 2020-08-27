@@ -27,9 +27,29 @@ namespace Frame.Domain
             return _postRepository.CriarPost(titulo, idUsuario);
         }
 
+        public void DeletarPost(int idUsuario, int idPost)
+        {
+            var post = ObterPost(idPost);
+
+            if (post == null || !post.Ativo)
+                return;
+
+            if(idUsuario != post.Usuario.Id)
+            {
+                throw new ErroExcluirPostDeOutroUsuarioException();
+            }
+
+            _postRepository.ExcluirPost(idPost);
+        }
+
         public List<Post> ObterTodosOsPosts()
         {
             return _postRepository.ObterTodosOsPosts();
+        }
+
+        public Post ObterPost(int idPost)
+        {
+            return _postRepository.ObterPost(idPost);
         }
     }
 }

@@ -9,5 +9,7 @@ namespace Frame.Orq.Interfaces
     {
         void CriarPost(List<RequisicaoImagem> imagens, string texto, string titulo, string link, string idUsuario);
         List<PostFront> ObterPosts();
+
+        void ExcluirPost(int idUsuarioLogado, int idPost);
     }
 }

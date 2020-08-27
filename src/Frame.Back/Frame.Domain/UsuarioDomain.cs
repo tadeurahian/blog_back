@@ -22,22 +22,17 @@ namespace Frame.Domain
         {
             var usuarioComMesmoNome = _usuarioRepository.ObterUsuarioPorNome(nome);
 
+            if (String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(senha))
+            {
+                throw new CamposVaziosCriarUsuariosException();
+            }
+
             if (usuarioComMesmoNome != null)
             {
                 throw new ErroCriarUsuarioComMesmoNomeException();
             }
 
-            if(String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(senha))
-            {
-                throw CamposVaziosCriarUsuariosException();
-            }
-
             return _usuarioRepository.CriarUsuario(nome, senha);
-        }
-
-        private Exception CamposVaziosCriarUsuariosException()
-        {
-            throw new NotImplementedException();
         }
 
         public Usuario ObterUsuarioValido(string nome, string senha)

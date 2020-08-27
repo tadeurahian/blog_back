@@ -67,5 +67,31 @@ namespace Frame.Host.Controllers
                 throw ex;
             }
         }
+
+        [HttpDelete]
+        [Route("{idPost}")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public IActionResult ExcluirPost([FromRoute]int idPost)
+        {
+            try
+            {
+                _postOrq.ExcluirPost(int.Parse(User.FindFirst(ClaimTypes.PrimarySid).Value), idPost);
+
+                return Ok(new RetornoPadrao<string>()
+                {
+                    Sucesso = true,
+                    Mensagem = "Post excluído com sucesso!",
+                    Resultado = String.Empty
+                });
+            }
+            catch (ErroExcluirPostDeOutroUsuarioException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

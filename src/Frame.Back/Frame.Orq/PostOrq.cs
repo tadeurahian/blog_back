@@ -39,6 +39,11 @@ namespace Frame.Orq
             }
         }
 
+        public void ExcluirPost(int idUsuarioLogado, int idPost)
+        {
+            _postDomain.DeletarPost(idUsuarioLogado, idPost);
+        }
+
         public List<PostFront> ObterPosts()
         {
             var posts = _postDomain.ObterTodosOsPosts();
@@ -47,11 +52,13 @@ namespace Frame.Orq
 
             return posts.Select(post => new PostFront()
             {
+                Id = post.Id,
                 Titulo = post.Titulo,
                 IdCriador = post.Usuario.Id,
+                NomeCriador = post.Usuario.Nome,
                 Conteudo = post.Conteudo?.Conteudo,
                 Link = post.Link?.Conteudo,
-                Imagens = post.Imagens?.Select(imagem => imagem.LinkBlob).ToList()
+                Imagens = post.Imagens?.Select(imagem => imagem.LinkBlob).ToList()                
             }).ToList();
         }
 

@@ -9,5 +9,7 @@ namespace Frame.Domain.Interfaces
     {
         int CriarPost(string titulo, string idUsuario);
         List<Post> ObterTodosOsPosts();
+
+        void DeletarPost(int idUsuario, int idPost);
     }
 }
